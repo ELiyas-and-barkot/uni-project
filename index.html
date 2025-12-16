@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADISS CLOTH | Luxury Essentials</title>
+    <!-- Load Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --color-primary: #000000;
+            --color-secondary: #FAF8F5;
+            --color-text: #1a1a1a;
+            --max-width: 1200px;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-secondary);
+            color: var(--color-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        /* Utility Container */
+        .container {
+            max-width: var(--max-width);
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            border-radius: 6px; /* Slightly more rounded */
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            border: 1px solid var(--color-primary);
+        }
+        /* Enhanced button hover effect */
+        .btn-primary:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem; /* text-sm */
+        }
+
+        /* --- 1. Header & Navigation --- */
+        .header {
+            background-color: white;
+            border-bottom: 1px solid #e5e7eb; 
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .nav-links {
+            display: none;
+            gap: 1.5rem;
+            font-weight: 500;
+        }
+        .nav-link {
+            color: #4b5563;
+            transition: all 0.2s;
+            text-decoration: none; /* Removed underline */
+        }
+        /* Enhanced nav link hover effect */
+        .nav-link:hover {
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Basket Button Styling */
+        .basket-toggle {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: none;
+            border: 1px solid transparent;
+            border-radius: 9999px; /* Fully rounded */
+        }
+        .basket-toggle:hover {
+            background-color: #f3f4f6;
+            border-color: #d1d5db;
+        }
+        
+        /* Media Query for Navigation */
+        @media (min-width: 768px) { /* md breakpoint */
+            .nav-links {
+                display: flex;
+            }
+        }
+        @media (max-width: 640px) { /* sm breakpoint */
+            .basket-toggle span {
+                display: none;
+            }
+        }
+        
+        /* --- 2. Main Sections --- */
+        .main-content {
+            flex-grow: 1;
+            padding: 4rem 1rem;
+        }
+
+        .section-padding {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+        
+        /* Hero Section Specifics */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh; 
+            margin-top: -4rem; 
+        }
+        .hero-box {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f3f4f6;
+            text-align: center;
+            max-width: 56rem;
+        }
+        .hero-title {
+            font-size: 3rem;
+            line-height: 1.25;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+        @media (min-width: 640px) {
+            .hero-title {
+                font-size: 4rem;
+            }
+        }
+
+        /* --- 3. Products Grid --- */
+        .product-header-group {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #d1d5db;
+            padding-bottom: 1rem;
+        }
+        @media (min-width: 768px) {
+             .product-header-group {
+                flex-direction: row;
+                align-items: center;
+             }
+        }
+        .section-title {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-size: 0.875rem; /* text-sm */
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            font-weight: 500;
+            border-radius: 9999px; /* rounded-full */
+            border: 1px solid #9ca3af; 
+            background-color: white;
+            color: #4b5563;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .filter-btn:hover {
+            background-color: #f3f4f6;
+        }
+        .filter-btn.active {
+            background-color: black;
+            color: white;
+            border-color: black;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Product Card Styling */
+        .product-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #f0f0f0; 
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .product-card:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); 
+            transform: translateY(-3px);
+        }
+        .card-img-container {
+            width: 100%;
+            height: 16rem; /* fixed height for consistency */
+            overflow: hidden;
+            padding: 0.75rem;
+            background-color: #f9fafb;
+        }
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.375rem;
+        }
+        .card-info {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .card-title {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        .card-description {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.75rem;
+            flex-grow: 1;
+            font-weight: 300;
+        }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.75rem;
+            border-top: 1px solid #f3f4f6;
+            margin-top: auto;
+        }
+        .card-price {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        /* --- 4. About & Contact --- */
+        .card-base {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f3f4f6;
+        }
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            color: #4b5563;
+            font-weight: 300;
+        }
+        @media (min-width: 1024px) {
+            .about-content {
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+        .ceo-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            background-color: #f9fafb;
+            border-radius: 0.25rem;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .ceo-img {
+            width: 10rem;
+            height: 10rem;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 0.75rem;
+            border: 2px solid white;
+        }
+        .ceo-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .contact-form-container {
+            max-width: 32rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            color: #4b5563;
+        }
+        .form-input {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.25rem;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        /* --- 5. Footer --- */
+        .footer {
+            background-color: var(--color-primary);
+            color: white;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .footer-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .footer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+        .footer-list li {
+            margin-bottom: 0.25rem;
+        }
+        .footer-list a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+        .footer-list a:hover {
+            color: white;
+        }
+        .footer-copyright {
+            padding-top: 1rem;
+            border-top: 1px solid #374151;
+            text-align: center;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        /* --- 6. Basket Drawer --- */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 40;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease-out;
+        }
+        .drawer-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 400px; 
+            height: 100%;
+            background-color: white;
+            z-index: 50;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%); 
+            transition: transform 0.4s ease-out;
+            display: flex; 
+            flex-direction: column;
+        }
+        .drawer.open {
+            transform: translateX(0);
+        }
+        .drawer-header {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .drawer-header button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .item-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0.75rem 0;
+        }
+        .item-row p {
+            margin: 0;
+        }
+        .item-row button {
+            color: #ef4444; /* red-500 */
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .item-row button:hover {
+            color: #b91c1c; /* red-700 */
+        }
+        .checkout-summary {
+            padding: 1rem;
+            border-top: 1px solid #e5e7eb;
+            background-color: #f9fafb;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        /* --- 7. Message Box --- */
+        #message-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--color-primary); 
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s;
+            transform: translateY(20px);
+            font-weight: 500;
+        }
+        #message-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- JavaScript for utility functions and state -->
+    <script>
+        // Global state for basket items: { id: number, name: string, price: number }
+        let basketItems = [];
+        let currentId = 0; // Simple unique ID generator
+
+        function generateUniqueId() {
+            return currentId++;
+        }
+        
+        // Custom non-blocking message box utility
+        function showMessage(message) {
+            const box = document.getElementById('message-box');
+            box.textContent = message;
+            box.classList.add('visible');
+            setTimeout(() => {
+                box.classList.remove('visible');
+            }, 3000);
+        }
+
+        function updateBasketCount() {
+            const count = basketItems.length;
+            const countElement = document.getElementById('basket-count');
+            if (countElement) {
+                countElement.textContent = `Basket (${count})`;
+            }
+        }
+
+        function addToBasket(productName, price) {
+            const newItem = {
+                id: generateUniqueId(),
+                name: productName,
+                price: price
+            };
+            basketItems.push(newItem);
+            updateBasketCount();
+            renderBasket(); // Update modal content
+            showMessage(`${productName} added to basket.`);
+        }
+
+        function removeItem(id) {
+            const initialCount = basketItems.length;
+            // Filter out the item with the matching ID
+            basketItems = basketItems.filter(item => item.id !== id);
+            
+            if (basketItems.length < initialCount) {
+                updateBasketCount();
+                renderBasket();
+                showMessage(`Item removed from basket.`);
+            }
+        }
+
+        function renderBasket() {
+            const content = document.getElementById('basket-content');
+            const summary = document.getElementById('basket-summary');
+            let total = 0;
+            let html = '';
+
+            if (basketItems.length === 0) {
+                html = '<p style="text-align:center; color:#6b7280; margin-top: 2.5rem;">Your basket is currently empty.</p>';
+                summary.innerHTML = '<p style="font-size:1.125rem; font-weight:500;">Total: $0.00</p>';
+            } else {
+                basketItems.forEach(item => {
+                    total += item.price;
+                    html += `
+                        <div class="item-row">
+                            <div>
+                                <p style="font-weight:500;">${item.name}</p>
+                                <p style="font-size:0.875rem; color:#6b7280;">$${item.price.toFixed(2)}</p>
+                            </div>
+                            <button onclick="removeItem(${item.id})">
+                                Remove
+                            </button>
+                        </div>
+                    `;
+                });
+                
+                summary.innerHTML = `
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>$${total.toFixed(2)}</span>
+                    </div>
+                    <button class="btn btn-primary" style="width:100%;" onclick="showMessage('Proceeding to Checkout!'); closeBasket();">
+                        Proceed to Checkout
+                    </button>
+                `;
+            }
+            content.innerHTML = html;
+        }
+
+        function openBasket() {
+            document.getElementById('basket-modal').classList.add('open');
+            document.getElementById('basket-overlay').classList.add('open');
+            renderBasket(); // Ensure basket is rendered when opened
+        }
+
+        function closeBasket() {
+            document.getElementById('basket-modal').classList.remove('open');
+            document.getElementById('basket-overlay').classList.remove('open');
+        }
+        
+        // JS for filtering luxury products
+        function filterProducts(category, event) {
+            showMessage(`Displaying: ${category} items`);
+            
+            // Toggle active state on filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active'); 
+            
+            // Simulate filtering
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (category === 'All' || cardCategory === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Initialize on window load
+        window.onload = () => {
+             // Find the 'All' button and trigger the filter function on it.
+             const allButton = document.querySelector('.filter-btn[onclick*="All"]');
+             if (allButton) {
+                // Simulate the click event to activate the button and filter
+                filterProducts('All', { currentTarget: allButton });
+             }
+             
+             // Ensure initial basket count is updated
+             updateBasketCount();
+        };
+    </script>
+
+    <!-- Global Message Box -->
+    <div id="message-box"></div>
+
+    <!-- Header / Navigation -->
+    <header class="header">
+        <div class="container header-inner">
+            <!-- Logo -->
+            <h1 class="logo">ADISS CLOTH</h1>
+            
+            <!-- Navigation Links -->
+            <nav class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#products" class="nav-link">Collection</a>
+                <a href="#about" class="nav-link">About Us</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <!-- Cart Button -->
+            <button class="basket-toggle" onclick="openBasket()">
+                <!-- Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" style="height: 1.5rem; width: 1.5rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l-1 12H6L5 9z" />
+                </svg>
+                <!-- Text/Count -->
+                <span id="basket-count" style="font-weight:500; font-size:1rem; margin-left:0.25rem;">Basket (0)</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Sections -->
+    <main class="main-content container">
+        
+        <!-- 1. HOME SECTION -->
+        <section id="home" class="hero-section">
+            <div class="hero-box">
+                <p style="font-size:0.875rem; font-weight:500; color:#4b5563; margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.2em;">The Only Essential is Attitude</p>
+                <h2 class="hero-title">
+                    We Don't Sell Cloth. We Sell Confidence.
+                </h2>
+                <p style="color:#4b5563; font-size:1.125rem; font-weight:300; margin-top:1.5rem; max-width:42rem; margin-left:auto; margin-right:auto;">
+                    Experience meticulously tailored suits, sumptuous cashmere, and essential accessories that define your presence and command attention.
+                </p>
+                <a href="#products" class="btn btn-primary" style="margin-top:2rem; display:inline-block;">
+                    Explore the Collection
+                </a>
+            </div>
+        </section>
+        
+        <!-- 2. PRODUCTS / COLLECTION SECTION -->
+        <section id="products" class="section-padding">
+            <!-- Product Filtering and Header -->
+            <div class="product-header-group">
+                 <h3 class="section-title">The Curated Collection</h3>
+                 <div class="filter-group">
+                    <button class="filter-btn" onclick="filterProducts('All', event)">All Luxury</button>
+                    <button class="filter-btn" onclick="filterProducts('Suits', event)">Tailoring</button>
+                    <button class="filter-btn" onclick="filterProducts('Knitwear', event)">Knitwear</button>
+                    <button class="filter-btn" onclick="filterProducts('Accessories', event)">Accessories</button>
+                 </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="product-grid">
+                
+                <!-- Product Card 1: The Cashmere Sweater (Knitwear) -->
+                <div class="product-card" data-category="Knitwear">
+                    <div class="card-img-container">
+                        <img class="card-img" 
+                             src="https://placehold.co/600x400/f5f5f5/000000?text=Cashmere+Sweater" 
+                             alt="Finest Grade Cashmere Sweater" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/f5f5f5/000000?text=Cashmere+Sweater';">
+                    </div>
+                    
+                    <div class="card-info">
+                        <h3 class="card-title">The Cashmere Sweater</h3>
+                        <p class="card-description">Italian Loro Piana Cashmere. Charcoal Grey.</p>
+                        <div class="card-footer">
+                            <span class="card-price">$499.00</span>
+                            <button class="btn btn-sm btn-primary" onclick="addToBasket('Cashmere Sweater', 499.00)">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2: Tailored Wool Suit (Suits) -->
+                <div class="product-card" data-category="Suits">
+                    <div class="card-img-container">
+                        <img class="card-img" 
+                             src="https://placehold.co/600x400/333333/ffffff?text=Tailored+Suit" 
+                             alt="Tailored Wool Suit"
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/333333/ffffff?text=Tailored+Suit';">
+                    </div>
+                    
+                    <div class="card-info">
+                        <h3 class="card-title">The Midnight Suit</h3>
+                        <p class="card-description">Custom-tailored Merino Wool. Slim fit.</p>
+                        <div class="card-footer">
+                            <span class="card-price">$1,850.00</span>
+                            <button class="btn btn-sm btn-primary" onclick="addToBasket('Midnight Suit', 1850.00)">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3: Signature Silk Scarf (Accessories) -->
+                <div class="product-card" data-category="Accessories">
+                    <div class="card-img-container">
+                        <img class="card-img" 
+                             src="https://placehold.co/600x400/D4C3A3/000000?text=Silk+Scarf" 
+                             alt="Signature Silk Scarf"
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/D4C3A3/000000?text=Silk+Scarf';">
+                    </div>
+                    
+                    <div class="card-info">
+                        <h3 class="card-title">Signature Silk Scarf</h3>
+                        <p class="card-description">Hand-rolled edges. Italian silk twill.</p>
+                        <div class="card-footer">
+                            <span class="card-price">$220.00</span>
+                            <button class="btn btn-sm btn-primary" onclick="addToBasket('Signature Silk Scarf', 220.00)">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4: Handcrafted Leather Oxfords (Accessories) -->
+                <div class="product-card" data-category="Accessories">
+                    <div class="card-img-container">
+                        <img class="card-img" 
+                             src="https://placehold.co/600x400/5A4739/ffffff?text=Leather+Oxfords" 
+                             alt="Handcrafted Leather Oxfords"
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/5A4739/ffffff?text=Leather+Oxfords';">
+                    </div>
+                    
+                    <div class="card-info">
+                        <h3 class="card-title">Leather Oxfords</h3>
+                        <p class="card-description">Goodyear welted construction. Hand-polished calfskin.</p>
+                        <div class="card-footer">
+                            <span class="card-price">$750.00</span>
+                            <button class="btn btn-sm btn-primary" onclick="addToBasket('Leather Oxfords', 750.00)">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 5: Classic Trench Coat (Suits) -->
+                <div class="product-card" data-category="Suits">
+                    <div class="card-img-container">
+                        <img class="card-img" 
+                             src="https://placehold.co/600x400/A3A3A3/000000?text=Trench+Coat" 
+                             alt="Classic Trench Coat"
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/A3A3A3/000000?text=Trench+Coat';">
+                    </div>
+                    
+                    <div class="card-info">
+                        <h3 class="card-title">The Regent Trench Coat</h3>
+                        <p class="card-description">Water-repellent gabardine. Full cotton lining.</p>
+                        <div class="card-footer">
+                            <span class="card-price">$1,200.00</span>
+                            <button class="btn btn-sm btn-primary" onclick="addToBasket('Regent Trench Coat', 1200.00)">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 6: Fine Dress Watch (Accessories) -->
+                <div class="product-card" data-category="Accessories">
+                    <div class="card-img-container">
+                        <img class="card-img" 
+                             src="https://placehold.co/600x400/E5E5E5/000000?text=Dress+Watch" 
+                             alt="Fine Dress Watch"
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/E5E5E5/000000?text=Dress+Watch';">
+                    </div>
+                    
+                    <div class="card-info">
+                        <h3 class="card-title">The Chronos Dress Watch</h3>
+                        <p class="card-description">Automatic movement. Sapphire glass.</p>
+                        <div class="card-footer">
+                            <span class="card-price">$950.00</span>
+                            <button class="btn btn-sm btn-primary" onclick="addToBasket('Chronos Dress Watch', 950.00)">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. ABOUT US SECTION -->
+        <section id="about" class="section-padding">
+             <div class="card-base">
+                <h3 class="section-title" style="border-bottom: 1px solid #d1d5db; padding-bottom: 0.75rem; margin-bottom: 1.5rem;">Our Story and Commitment</h3>
+                <div class="about-content">
+                    
+                    <!-- CEO Profile -->
+                    <div class="ceo-profile">
+                        <img class="ceo-img"
+                             src="wmremove-transformed.jpg" 
+                             alt="Eliyas Yonas, CEO of ADISS CLOTH">
+                        <h4 class="ceo-title">Eliyas Yonas</h4>
+                        <p style="font-size:0.875rem; color:#6b7280;">Founder & CEO</p>
+                        <p style="font-size:0.75rem; text-align:center; margin-top:0.5rem; color:#9ca3af; font-style:italic;">"Confidence is the only true essential."</p>
+                    </div>
+
+                    <!-- Company Story -->
+                    <div>
+                        <p style="margin-bottom:1rem;">ADISS CLOTH was founded by CEO **Eliyas Yonas** on the principle that true luxury lies in timeless design, impeccable quality, and absolute ethics. We reject fast fashion in favor of enduring style, focusing on a curated collection of essentials that are designed to last a lifetime.</p>
+                        
+                        <h4 style="font-size:1.125rem; font-weight:600; margin-top:1rem; margin-bottom:0.5rem;">Global Craftsmanship: Sourced in Ethiopia, Assembled in Europe</h4>
+                        <p style="margin-bottom:1rem;">Our supply chain is a testament to global excellence: the luxury raw materials are ethically sourced from the rich lands of **Ethiopia**. These precious fibers are then brought to skilled, professional tailoring houses in the **UK and Italy** for meticulous assembly and finishing. This unique synergy of Ethiopian heritage and European craftsmanship is what defines our exceptional quality.</p>
+
+                        <h4 style="font-size:1.125rem; font-weight:600; margin-top:1rem; margin-bottom:0.5rem;">Our Vision: International Quality & Brand Distinction</h4>
+                        <p style="margin-bottom:1rem;">Our ambition is to set an international standard for quiet luxury. The quality of our product speaks louder than marketing—it's an impressive statement of durability, design, and distinction. The confidence you wear comes directly from the integrity of the garment's creation.</p>
+                        <a href="#products" style="margin-top:1rem; display:inline-block; border:1px solid black; color:black; padding:0.5rem 1rem; font-size:0.875rem; font-weight:600; text-decoration:none; transition:all 0.2s; border-radius:4px;" class="hover-effect">
+                            See Our Standards
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. CONTACT SECTION -->
+        <section id="contact" class="section-padding">
+            <div class="card-base contact-form-container">
+                <h3 class="section-title" style="border-bottom: 1px solid #d1d5db; padding-bottom: 0.75rem; margin-bottom: 1.5rem; text-align:center;">Inquire & Connect</h3>
+                <p style="text-align:center; color:#4b5563; margin-bottom:1.5rem;">We welcome your communication.</p>
+                <form onsubmit="event.preventDefault(); showMessage('Your message has been sent to our private client advisor.'); this.reset();">
+                    <div style="display:flex; flex-direction:column; gap:1rem;">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" id="name" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Your Inquiry</label>
+                            <textarea id="message" rows="4" required class="form-input"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:100%;">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h5 class="footer-title">Collection</h5>
+                    <ul class="footer-list">
+                        <li><a href="#products" onclick="filterProducts('Suits', event)" style="color:inherit; text-decoration:none;">Tailoring</a></li>
+                        <li><a href="#products" onclick="filterProducts('Knitwear', event)" style="color:inherit; text-decoration:none;">Knitwear</a></li>
+                        <li><a href="#products" onclick="filterProducts('Accessories', event)" style="color:inherit; text-decoration:none;">Accessories</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="footer-title">ADISS CLOTH</h5>
+                    <ul class="footer-list">
+                        <li><a href="#about" style="color:inherit; text-decoration:none;">Heritage</a></li>
+                        <li><a href="#contact" style="color:inherit; text-decoration:none;">Client Services</a></li>
+                        <li><a href="#" style="color:inherit; text-decoration:none;">Lookbook</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="footer-title">Support</h5>
+                    <ul class="footer-list">
+                        <li><a href="#" style="color:inherit; text-decoration:none;">Shipping & Returns</a></li>
+                        <li><a href="#" style="color:inherit; text-decoration:none;">Size Guide</a></li>
+                        <li><a href="#contact" style="color:inherit; text-decoration:none;">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div style="grid-column: span 2 / span 2;">
+                     <h5 class="footer-title">Philosophy</h5>
+                     <p style="font-size:0.875rem; color:#9ca3af; font-weight:300;">We craft timeless luxury, ensuring every detail reflects superior quality and an enduring aesthetic.</p>
+                </div>
+            </div>
+            
+            <div class="footer-copyright">
+                <p>&copy; 2025 ADISS CLOTH. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Basket Drawer Modal (Overlay and Drawer) -->
+    <div id="basket-overlay" class="drawer-overlay" onclick="closeBasket()"></div> 
+    
+    <!-- Drawer Content -->
+    <div id="basket-modal" class="drawer">
+        <div class="drawer-header">
+            <h4 style="font-size:1.25rem; font-weight:700;">Your Basket</h4>
+            <button onclick="closeBasket()">
+                <svg xmlns="http://www.w3.org/2000/svg" style="height: 1.5rem; width: 1.5rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <!-- Basket Items List -->
+        <div id="basket-content" class="item-list">
+            <!-- Items rendered here by JavaScript -->
+        </div>
+        <!-- Basket Summary and Checkout Button -->
+        <div id="basket-summary" class="checkout-summary">
+             <!-- Summary rendered here by JavaScript -->
+        </div>
+    </div>
+
+</body>
+</html>
