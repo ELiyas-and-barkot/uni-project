@@ -130,21 +130,23 @@ let basketItems = [];
              // Ensure initial basket count is updated
              updateBasketCount();
         };
-const btn = document.getElementById('theme-toggle');
-const body = document.body;
 
-btn.addEventListener('click', () => {
-    const isDark = body.getAttribute('data-theme') === 'dark';
-    
-    if (isDark) {
-        body.removeAttribute('data-theme');
-    } else {
-        body.setAttribute('data-theme', 'dark');
+    const toggleBtn = document.getElementById('themeToggle');
+    const body = document.body;
+
+    toggleBtn.addEventListener('click', () => {
+        body.classList.toggle('dark');
+
+        // Save user preference
+        localStorage.setItem(
+            'theme',
+            body.classList.contains('dark') ? 'dark' : 'light'
+        );
+    });
+
+    // Load saved theme on page load
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark');
     }
-    
-    // Optional: Add a little bounce animation on click
-    btn.style.transform = "scale(0.8)";
-    setTimeout(() => {
-        btn.style.transform = "";
-    }, 100);
-});
+
+
