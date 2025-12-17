@@ -11,19 +11,22 @@
         /* Base Styles */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--color-secondary);
-            color: var(--color-text);
+            background-color: var(--bg-color);
+            color: var(--accent);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             margin: 0;
             padding: 0;
             scroll-behavior: smooth;
+         
+     
         }
 [data-theme="dark"] {
     --bg-color: #1a1a1a;
     --btn-color: #f0f0f0; /* Moon White */
     --accent: #fff;
+}
 
         /* Utility Container */
         .container {
