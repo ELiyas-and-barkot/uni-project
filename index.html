@@ -10,39 +10,30 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-
-    <!-- JavaScript for utility functions and state -->
-    <script>
-        // Global state for basket items: { id: number, name: string, price: number }
-        
-    </script>
-
-    <!-- Global Message Box -->
     <div id="message-box"></div>
 
-    <!-- Header / Navigation -->
+    
     <header class="header">
         <div class="container header-inner">
-            <!-- Logo -->
             <h1 class="logo">ADISS CLOTH</h1>
-            
-            <!-- Navigation Links -->
             <nav class="nav-links">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#products" class="nav-link">Collection</a>
                 <a href="#about" class="nav-link">About Us</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </nav>
-
-            <!-- Cart Button -->
             <button class="basket-toggle" onclick="openBasket()">
-                <!-- Icon -->
                 <svg xmlns="http://www.w3.org/2000/svg" style="height: 1.5rem; width: 1.5rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l-1 12H6L5 9z" />
                 </svg>
-                <!-- Text/Count -->
+            
                 <span id="basket-count" style="font-weight:500; font-size:1rem; margin-left:0.25rem;">Basket (0)</span>
             </button>
+            <div class="container">
+        <button id="theme-toggle" class="toggle-btn">
+            <div class="icon"></div>
+        </button>
+    </div>
         </div>
     </header>
 
