@@ -130,3 +130,21 @@ let basketItems = [];
              // Ensure initial basket count is updated
              updateBasketCount();
         };
+const btn = document.getElementById('theme-toggle');
+const body = document.body;
+
+btn.addEventListener('click', () => {
+    const isDark = body.getAttribute('data-theme') === 'dark';
+    
+    if (isDark) {
+        body.removeAttribute('data-theme');
+    } else {
+        body.setAttribute('data-theme', 'dark');
+    }
+    
+    // Optional: Add a little bounce animation on click
+    btn.style.transform = "scale(0.8)";
+    setTimeout(() => {
+        btn.style.transform = "";
+    }, 100);
+});
